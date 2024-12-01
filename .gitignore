@@ -1,0 +1,17 @@
+# Windows
+Thumbs.db
+
+# Applications
+*.app
+*.exe
+*.war
+*.o
+
+# VS
+.vs/
+*.sln
+*.filters
+*.vcxproj
+*.vcxproj.*
+Debug/
+Release/
