@@ -11,6 +11,7 @@ int main()
     std::vector<std::unique_ptr<aoc::CDay>> puzzles{};
 	
     // Solve puzzles
+    puzzles.push_back(std::make_unique<aoc::CDay01>(ESolve::ALL));
     puzzles.push_back(std::make_unique<aoc::CDay07>(ESolve::ALL));
 
     for (auto& puzzle : puzzles)

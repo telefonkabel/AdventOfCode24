@@ -15,6 +15,8 @@ namespace aoc
 {
     using vecStr = std::vector<std::string>;
     using vecInt = std::vector<int>;
+    using vVecStr = std::vector<std::vector<std::string>>;
+    using vVecInt = std::vector<std::vector<int>>;
 
     //Base class for all puzzles (usually one per day).
 	class CDay
@@ -34,7 +36,7 @@ namespace aoc
         bool inRange(int low, int high, int x) const;
 
         // Parses the input file into a specified container type (e.g., list or vector).
-        // Supports integer and strings for now
+        // Supports vectors of integers and strings, which is sufficient for most puzzles
         template <typename Container>
         Container parse2Container(const int day) const
         {
@@ -44,14 +46,39 @@ namespace aoc
 
             while (std::getline(inFile, line))
             {
+                std::vector<std::string> vecLine{ splitBy(line, {" "}) };
+
                 if constexpr (std::is_same_v<typename Container::value_type, int>)
                 {
+                    if (vecLine.size() != 1)
+                    {
+                        std::cerr << "Invalid Input or logic error: '" << line << "' can't be parsed into an integer." << std::endl;
+                    }
+
                     int value{};
-                    if (!isValidInt(line, value))
+                    if (!isValidInt(vecLine.front(), value))
                     {
                         return Container{};
                     }
                     input.push_back(value);
+                }
+                else if constexpr (std::is_same_v<typename Container::value_type, std::vector<int>>)
+                {
+                    std::vector<int> newInput{};
+                    for (const auto& val : vecLine)
+                    {
+                        int value{};
+                        if (!isValidInt(val, value))
+                        {
+                            return Container{};
+                        }
+                        newInput.push_back(value);
+                    }
+                    input.push_back(newInput);
+                }
+                else if constexpr (std::is_same_v<typename Container::value_type, std::vector<std::string>>)
+                {
+                    input.push_back(vecLine);
                 }
                 else
                 {
