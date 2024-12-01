@@ -12,7 +12,6 @@ namespace aoc
         ~CDay01();
 
     private:
-        std::string calculate(ESolve toSolve) const;
         std::string calculateSilver() const override;
         std::string calculateGold() const override;
 	};
