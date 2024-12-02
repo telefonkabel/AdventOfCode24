@@ -12,7 +12,7 @@ namespace aoc
     CDay01::CDay01(ESolve toSolve) :CDay(01, toSolve) {};
     CDay01::~CDay01() = default;
 
-    bool lessBySecondVal(const vecInt& vec1, const vecInt& vec2)
+    static bool lessBySecondVal(const vecInt& vec1, const vecInt& vec2)
     {
         if (vec1.size() != 2 || vec2.size() != 2)
         {
@@ -25,6 +25,7 @@ namespace aoc
 
     std::string CDay01::calculateSilver() const
     {
+        int solution{};
         vVecInt start{ parse2Container<vVecInt>(getID()) };
 
         std::sort(start.begin(), start.end());
@@ -32,7 +33,6 @@ namespace aoc
         vVecInt startCopy{ start };
         std::sort(startCopy.begin(), startCopy.end(), lessBySecondVal);
 
-        int solution{};
         for (int i{ 0 }; i < start.size(); ++i)
         {
             solution += std::abs(start[i].front() - startCopy[i].back());
@@ -43,6 +43,7 @@ namespace aoc
 
     std::string CDay01::calculateGold() const
     {
+        int solution{};
         vVecInt start{ parse2Container<vVecInt>(getID()) };
 
         std::sort(start.begin(), start.end());
@@ -50,7 +51,6 @@ namespace aoc
         vVecInt startCopy{ start };
         std::sort(startCopy.begin(), startCopy.end(), lessBySecondVal);
 
-        int solution{};
         for (const vecInt& vec : start)
         {
             int target{ vec.front() };
