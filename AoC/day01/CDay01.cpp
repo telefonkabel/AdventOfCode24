@@ -1,10 +1,7 @@
 #include "CDay01.h"
 
 #include <vector>
-#include <map>
-#include <unordered_set>
-#include <ctype.h>
-#include <iostream>
+#include <ostream>
 
 
 namespace aoc

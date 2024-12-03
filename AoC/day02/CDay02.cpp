@@ -1,10 +1,7 @@
 #include "CDay02.h"
 
 #include <vector>
-#include <map>
-#include <unordered_set>
-#include <ctype.h>
-#include <iostream>
+#include <ostream>
 
 
 namespace aoc
@@ -14,9 +11,9 @@ namespace aoc
 
     bool CDay02::checkWithRemove(const vecInt& vec, const ESolve toSolve) const
     {
-        for (size_t removeIndex = 0; removeIndex < vec.size(); ++removeIndex)
+        for (size_t removeIndex{ 0 }; removeIndex < vec.size(); ++removeIndex)
         {
-            vecInt vecCopy = vec;
+            vecInt vecCopy{ vec };
             vecCopy.erase(vecCopy.begin() + removeIndex);
             if (check(vecCopy, toSolve, true))
             {

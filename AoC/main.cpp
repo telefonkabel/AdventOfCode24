@@ -13,6 +13,7 @@ int main()
     // Solve puzzles
     puzzles.push_back(std::make_unique<aoc::CDay01>(ESolve::ALL));
     puzzles.push_back(std::make_unique<aoc::CDay02>(ESolve::ALL));
+    puzzles.push_back(std::make_unique<aoc::CDay03>(ESolve::ALL));
     puzzles.push_back(std::make_unique<aoc::CDay07>(ESolve::ALL));
 
     for (auto& puzzle : puzzles)
