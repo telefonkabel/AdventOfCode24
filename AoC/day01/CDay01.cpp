@@ -30,7 +30,7 @@ namespace aoc
         vVecInt startCopy{ start };
         std::sort(startCopy.begin(), startCopy.end(), lessBySecondVal);
 
-        for (int i{ 0 }; i < start.size(); ++i)
+        for (size_t i{ 0 }; i < start.size(); ++i)
         {
             solution += std::abs(start[i].front() - startCopy[i].back());
         }
