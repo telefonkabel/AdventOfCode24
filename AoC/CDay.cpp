@@ -34,7 +34,7 @@ namespace aoc
         }
         default:
         {
-            std::cout << std::endl << "Day " << _dayID << " will be skipped." << std::endl;
+            std::cout << "\nDay " << _dayID << " will be skipped." << std::endl;
         }
         }
         return;

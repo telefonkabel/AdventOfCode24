@@ -1,21 +1,20 @@
 #pragma once
 
 #include "CDay.h"
-#include "CHand.h"
 
 
 namespace aoc
 {
-	class CDay07 : public CDay
+	class CDay05 : public CDay
 	{
 	public:
-        CDay07(ESolve toSolve = ESolve::ALL);
-        ~CDay07();
+        CDay05(ESolve toSolve = ESolve::ALL);
+        ~CDay05();
 
     private:
-        std::string calculate(ESolve toSolve) const;
         std::string calculateSilver() const override;
         std::string calculateGold() const override;
+        int solve(const ESolve toSolve) const;
 	};
 
 } //end of namespace aoc

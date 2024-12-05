@@ -38,7 +38,51 @@ namespace aoc
         // Parses the input file into a specified container type (e.g., list or vector).
         // Supports vectors of integers and strings, which is sufficient for most puzzles
         template <typename Container>
-        Container parse2Container(const int day) const
+        void parseStr2Container(Container& input, const std::string str, const std::vector<std::string>& dels = { " " }) const
+        {
+            std::vector<std::string> vecLine{ splitBy(str, dels) };
+
+            if constexpr (std::is_same_v<typename Container::value_type, int>)
+            {
+                if (vecLine.size() != 1)
+                {
+                    std::cerr << "Invalid Input or logic error: '" << str << "' can't be parsed into an integer." << std::endl;
+                }
+
+                int value{};
+                if (!isValidInt(vecLine.front(), value))
+                {
+                    return;
+                }
+                input.push_back(value);
+            }
+            else if constexpr (std::is_same_v<typename Container::value_type, std::vector<int>>)
+            {
+                std::vector<int> vInt{};
+                for (const auto& val : vecLine)
+                {
+                    int value{};
+                    if (!isValidInt(val, value))
+                    {
+                        return;
+                    }
+                    vInt.push_back(value);
+                }
+                input.push_back(vInt);
+            }
+            else if constexpr (std::is_same_v<typename Container::value_type, std::vector<std::string>>)
+            {
+                input.push_back(vecLine);
+            }
+            else
+            {
+                // Default to string, since it is applicable for all puzzle types with input file
+                input.push_back(str);
+            }
+        }
+
+        template <typename Container>
+        Container parse2Container(const int day, const std::vector<std::string>& dels = { " " }) const
         {
             std::ifstream inFile{ parse(day) };
             Container input{};
@@ -46,45 +90,7 @@ namespace aoc
 
             while (std::getline(inFile, line))
             {
-                std::vector<std::string> vecLine{ splitBy(line, {" "}) };
-
-                if constexpr (std::is_same_v<typename Container::value_type, int>)
-                {
-                    if (vecLine.size() != 1)
-                    {
-                        std::cerr << "Invalid Input or logic error: '" << line << "' can't be parsed into an integer." << std::endl;
-                    }
-
-                    int value{};
-                    if (!isValidInt(vecLine.front(), value))
-                    {
-                        return Container{};
-                    }
-                    input.push_back(value);
-                }
-                else if constexpr (std::is_same_v<typename Container::value_type, std::vector<int>>)
-                {
-                    std::vector<int> newInput{};
-                    for (const auto& val : vecLine)
-                    {
-                        int value{};
-                        if (!isValidInt(val, value))
-                        {
-                            return Container{};
-                        }
-                        newInput.push_back(value);
-                    }
-                    input.push_back(newInput);
-                }
-                else if constexpr (std::is_same_v<typename Container::value_type, std::vector<std::string>>)
-                {
-                    input.push_back(vecLine);
-                }
-                else
-                {
-                    // Default to string, since it is applicable for all puzzle types with input file
-                    input.push_back(line);
-                }
+                parseStr2Container<Container>(input, line, dels);
             }
             return input;
         };
