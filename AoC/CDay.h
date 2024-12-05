@@ -44,17 +44,15 @@ namespace aoc
 
             if constexpr (std::is_same_v<typename Container::value_type, int>)
             {
-                if (vecLine.size() != 1)
+                for (const auto& val : vecLine)
                 {
-                    std::cerr << "Invalid Input or logic error: '" << str << "' can't be parsed into an integer." << std::endl;
+                    int value{};
+                    if (!isValidInt(val, value))
+                    {
+                        return;
+                    }
+                    input.push_back(value);
                 }
-
-                int value{};
-                if (!isValidInt(vecLine.front(), value))
-                {
-                    return;
-                }
-                input.push_back(value);
             }
             else if constexpr (std::is_same_v<typename Container::value_type, std::vector<int>>)
             {
