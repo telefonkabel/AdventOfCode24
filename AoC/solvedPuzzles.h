@@ -5,3 +5,5 @@
 #include "day03/CDay03.h"
 #include "day04/CDay04.h"
 #include "day05/CDay05.h"
+
+#include "day09/CDay09.h"

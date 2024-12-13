@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <iterator>
+#include <filesystem>
 
 
 namespace aoc
